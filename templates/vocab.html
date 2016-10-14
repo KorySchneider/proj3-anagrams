@@ -80,13 +80,32 @@
 <br />
 <div class="row">
   <div class="col-xs-6 text-center">
-  <form id="entry" method="POST" action="/_check">
+  <form id="entry" action="/_check">
     <label for="attempt">Word:</label>
     <input id="attempt" name="attempt" type="text" width="15"
       autocomplete="off"  autofocus />
-    <input type="submit" name="try" />
   </form>
 </div></div>
+
+<script>
+  $('#entry').submit(function(event) {
+    event.preventDefault();
+  });
+
+  $('#attempt').keyup(function(event) {
+    var txt = $('#attempt').val();
+    var letter = String.fromCharCode(event.which);
+
+    if (! "ABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(letter)) { return }
+
+    $.getJSON("/_check", { text: txt }, function(data) {
+      console.log(data);
+      if (data['word_matched']) {
+        window.location = data['redirect']
+      }
+    });
+  });
+</script>
 
 <br />
 
@@ -108,7 +127,6 @@
     {% endfor %}
   {% endif %}
 {% endwith %}
-
 
 
  </div> <!-- container -->
