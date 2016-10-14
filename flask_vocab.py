@@ -103,7 +103,7 @@ def check():
   elif text in matches:
     response['message'] = "You already found {}".format(text)
   elif not matched:
-    response['message'] = "{} isn't in the list of words".format(text)
+    pass
   elif not in_jumble:
     response['message'] = '"{}" can\'t be made from the letters {}'.format(text,jumble)
   else:
