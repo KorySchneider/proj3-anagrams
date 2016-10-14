@@ -83,7 +83,7 @@ def check():
   """
   app.logger.debug("Entering check")
 
-  response = { 'redirect': '', 'word_matched': False }
+  response = { 'redirect': '', 'word_matched': False, 'message': '' }
 
   ## The data we need, from form and from cookie
   text = request.args.get("text", type=str)
@@ -100,15 +100,15 @@ def check():
     matches.append(text)
     flask.session["matches"] = matches
     response['word_matched'] = True
-  #elif text in matches:
-  #  flask.flash("You already found {}".format(text))
-  #elif not matched:
-  #  flask.flash("{} isn't in the list of words".format(text))
-  #elif not in_jumble:
-  #  flask.flash('"{}" can\'t be made from the letters {}'.format(text,jumble))
-  #else:
-  #  app.logger.debug("This case shouldn't happen!")
-  #  assert False  # Raises AssertionError
+  elif text in matches:
+    response['message'] = "You already found {}".format(text)
+  elif not matched:
+    response['message'] = "{} isn't in the list of words".format(text)
+  elif not in_jumble:
+    response['message'] = '"{}" can\'t be made from the letters {}'.format(text,jumble)
+  else:
+    app.logger.debug("This case shouldn't happen!")
+    assert False  # Raises AssertionError
 
   ## Choose page:  Solved enough, or keep going? 
   if len(matches) >= flask.session["target_count"]:
