@@ -1,42 +1,32 @@
 # proj3-anagrams
-Vocabularly anagrams game for primary school English language learners (ELL)
+_Kory Schneider_
 
+_CIS 322, Fall 2016_
 
-## Overview
+## What is this?
+This is a simple vocabulary anagrams game for primary school English language learners (ELL).
 
-A simple anagram game designed for English-language learning students in 
-elementary and middle school.  
-Students are presented with a list of vocabulary words (taken from a text file) 
-and an anagram.  The anagram is a jumble of some number of vocabulary words, randomly chosen.  Students attempt to type vocabularly words that can be created from the  
-jumble.  When a matching word is typed, it is added to a list of solved words. 
+## Installation
+Clone the repository:
 
-The vocabulary word list is fixed for one invocation of the server, so multiple
-students connected to the same server will see the same vocabulary list but may 
-have different anagrams.
+    $ cd where/you/want/it
+    $ git clone https://github.com/koryschneider/proj3-anagrams
+    $ cd proj3-anagrams
 
-## Authors 
+Then set it up and run it:
 
-Initial version by M Young; to be revised by CIS 322 students. 
+    $ bash ./configure && make service
 
-## Status
+## Usage
+`$ make service` will start a Green Unicorn (gunicorn) server, which is more suitable for running over a long period of time.
 
-flask_vocab.py and the template vocab.html are a 'skeleton' version 
-of the anagram game for a CIS 322 project.  They uses conventional  
-interaction through a form, interacting only when the user submits the form. 
-Your assignment is to replace the interaction with AJAX interaction on each 
-keystroke. 
+`$ make run` will launch the server in debugging mode.
 
-## Minijax? 
+`$ make test` will run the test suite.
 
-flask_minijax.py and templates/minijax.html are a tiny example of using JQuery 
-with flask for an Ajax application.  They should not be included in the
-version of the project you turn in. 
+## Gameplay
+When you start the game, you will be given a list of words, and a list of jumbled letters. Your goal is to spell three words (amount can be changed in CONFIG.py) from the list of letters. When a matching word is typed, it is added to the list of found words.
 
+## Credit
 
-## To run automated tests 
-* `nosetests`
-
-There are currently nose tests for vocab.py, letterbag.py, and jumble.py. 
-
-
-
+Forked from Michal Young at https://github.com/UO-CIS-322/proj3-anagrams for CIS 322: Intro to Software Engineering.
